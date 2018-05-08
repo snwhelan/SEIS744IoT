@@ -1,0 +1,69 @@
+// This #include statement was automatically added by the Particle IDE.
+#include <RelayShield.h>
+
+// Create an instance of the RelayShield library, so we have something to talk to
+RelayShield myRelays;
+
+// Create prototypes of the Spark.functions we'll declare in setup()
+int relayOn(String command);
+int relayOff(String command);
+int checkStatus(String command);
+
+
+void setup() {
+    
+    //.begin() sets up a couple of things and is necessary to use the rest of the functions
+    myRelays.begin();
+
+    // Register Spark.functions and assign them names
+    Particle.function("relayOn", relayOn);
+    Particle.function("relayOff", relayOff);
+    Particle.function("toggleRelay", toggleRelay);
+
+}
+
+int relayOn(String command){
+    // Ritual incantation to convert String into Int
+    char inputStr[64];
+    command.toCharArray(inputStr,64);
+    int i = atoi(inputStr);
+    
+    // Turn on Relay 1 
+    // From your Do Button config, call Relay 1 by passing in D1 
+    myRelays.on(D1);
+    
+    // Respond
+    return 1;    
+}
+
+// myRelay.on and myRelay.off momentarily turns on then off Relay 1.  This simulates a button press when you hook the 
+// physical button to the normally open (two left) leads on the relay.  Again, I passed in Relay 1. 
+// In IFTTT Do Button app, I called the 'stacianicole', then pointed the function to toggleRelay, and in the arguments field, put a 1. 
+int toggleRelay(String command){
+    // Ritual incantation to convert String into Int
+    char inputStr[64];
+    command.toCharArray(inputStr,64);
+    int i = atoi(inputStr);
+    
+    // Turn on relay 1
+    myRelays.on(D1);
+    delay(1000);
+    myRelays.off(D1);
+    // Respond
+    return 1;    
+}
+
+//  This is used in toggleRelay, however, it can also be used stand alone if you have a normally closed relay and want
+//  to temporarily open it.
+int relayOff(String command){
+    // Ritual incantation to convert String into Int
+    char inputStr[64];
+    command.toCharArray(inputStr,64);
+    int i = atoi(inputStr);
+    
+    // Turn relay 1 off 
+    myRelays.off(D1);
+    
+    // Respond
+    return 1;    
+}
