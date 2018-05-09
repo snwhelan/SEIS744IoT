@@ -29,8 +29,8 @@ int relayOn(String command){
     int i = atoi(inputStr);
     
     // Turn on Relay 1 
-    // From your Do Button config, call Relay 1 by passing in D1 
-    myRelays.on(D1);
+    // From your Do Button config, call Relay 1 by passing in D3 
+    myRelays.on(D3);
     
     // Respond
     return 1;    
@@ -46,9 +46,9 @@ int toggleRelay(String command){
     int i = atoi(inputStr);
     
     // Turn on relay 1
-    myRelays.on(D1);
+    myRelays.on(D3);
     delay(1000);
-    myRelays.off(D1);
+    myRelays.off(D3);
     // Respond
     return 1;    
 }
@@ -62,7 +62,7 @@ int relayOff(String command){
     int i = atoi(inputStr);
     
     // Turn relay 1 off 
-    myRelays.off(D1);
+    myRelays.off(D3);
     
     // Respond
     return 1;    
