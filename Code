@@ -8,6 +8,8 @@ RelayShield myRelays;
 int relayOn(String command);
 int relayOff(String command);
 int checkStatus(String command);
+int RELAY1 = D3;
+
 
 
 void setup() {
@@ -20,6 +22,10 @@ void setup() {
     Particle.function("relayOff", relayOff);
     Particle.function("toggleRelay", toggleRelay);
 
+   pinMode(RELAY1, OUTPUT);
+   digitalWrite(RELAY1, LOW);
+
+
 }
 
 int relayOn(String command){
@@ -29,8 +35,8 @@ int relayOn(String command){
     int i = atoi(inputStr);
     
     // Turn on Relay 1 
-    // From your Do Button config, call Relay 1 by passing in D3 
-    myRelays.on(D3);
+    // From your Do Button config, call Relay 1 by passing in D1 
+    myRelays.on(RELAY1);
     
     // Respond
     return 1;    
@@ -46,9 +52,9 @@ int toggleRelay(String command){
     int i = atoi(inputStr);
     
     // Turn on relay 1
-    myRelays.on(D3);
+    myRelays.on(RELAY1);
     delay(1000);
-    myRelays.off(D3);
+    myRelays.off(RELAY1);
     // Respond
     return 1;    
 }
@@ -62,7 +68,7 @@ int relayOff(String command){
     int i = atoi(inputStr);
     
     // Turn relay 1 off 
-    myRelays.off(D3);
+    myRelays.off(RELAY1);
     
     // Respond
     return 1;    
